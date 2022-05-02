@@ -4,6 +4,6 @@ namespace Georgia_Tech_Library_API.Repository
 {
     public interface ICampusRepository : IGenericRepository<Campus>
     {
-        Campus GetCampusByName(string name);
+        Task<Campus> GetCampusByName(string name);
     }
 }
