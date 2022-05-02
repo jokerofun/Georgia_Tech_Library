@@ -1,6 +1,4 @@
 using Microsoft.Data.SqlClient;
-using System.ComponentModel.DataAnnotations;
-using Dapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
