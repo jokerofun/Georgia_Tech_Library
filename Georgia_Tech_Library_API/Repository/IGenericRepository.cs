@@ -2,10 +2,9 @@
 {
     public interface IGenericRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        void Insert(T obj);
-        void Update(T obj);
-        void Delete(object id);
+        Task<IEnumerable<T>> GetAll();
+        Task<T> Insert(T obj);
+        Task<T> Update(T obj);
+        Task <bool> Delete(T obj);
     }
 }
-
