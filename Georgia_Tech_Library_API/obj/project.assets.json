@@ -2539,19 +2539,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simeo\\.nuget\\packages\\": {}
+    "C:\\Users\\sebas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_API\\Georgia_Tech_Library_API.csproj",
+      "projectUniqueName": "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_API\\Georgia_Tech_Library_API.csproj",
       "projectName": "Georgia_Tech_Library_API",
-      "projectPath": "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_API\\Georgia_Tech_Library_API.csproj",
-      "packagesPath": "C:\\Users\\simeo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_API\\obj\\",
+      "projectPath": "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_API\\Georgia_Tech_Library_API.csproj",
+      "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\simeo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

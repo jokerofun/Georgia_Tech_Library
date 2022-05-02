@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj": {}
+    "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj": {
+    "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj",
+        "projectUniqueName": "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj",
         "projectName": "Georgia_Tech_Library_Test",
-        "projectPath": "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj",
-        "packagesPath": "C:\\Users\\simeo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simeo\\OneDrive\\Desktop\\Projects\\UCN Projects\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\obj\\",
+        "projectPath": "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\Georgia_Tech_Library_Test.csproj",
+        "packagesPath": "C:\\Users\\sebas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sebas\\OneDrive\\Desktop\\Georgia_Tech_Library\\Georgia_Tech_Library_Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\simeo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sebas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
