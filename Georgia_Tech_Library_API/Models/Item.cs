@@ -7,7 +7,18 @@
         public string Edition { get; set; }
         public string Publisher { get; set; }
         public string DateOfPublishing { get; set; }
-        public ItemType Type { get; set; }
+        public Type Type { get; set; }
+    }
 
+    public class ItemDto
+    {
+        public string ISBN { get; set; }
+        public string Title { get; set; }
+        public string Edition { get; set; }
+        public string Publisher { get; set; }
+        public string DateOfPublishing { get; set; }
+        public Type Type { get; set; }
+        public List<Author> authors { get; set; }
+        public List<Subject> subjects { get; set; }
     }
 }
