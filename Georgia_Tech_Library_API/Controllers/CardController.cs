@@ -10,20 +10,17 @@ namespace Georgia_Tech_Library_API.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly ICardRepository cardRepository;
-        public CardController(IConfiguration configuration)
+        private readonly ICardRepository _cardRepository;
+        public CardController(ICardRepository cardRepository)
         {
-            _configuration = configuration;
-            cardRepository = new CardRepository(_configuration);
+            _cardRepository = cardRepository;
         }
 
         // GET: api/<CardController>
         [HttpGet]
         public async Task<IEnumerable<Card>> Get()
         {
-            //return new string[] { "value1", "value2" };
-            return await cardRepository.GetAll();
+            return await _cardRepository.GetAll();
         }
 
         // GET api/<CardController>/5
@@ -35,8 +32,9 @@ namespace Georgia_Tech_Library_API.Controllers
 
         // POST api/<CardController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Card> Post([FromBody] Card value)
         {
+            return await _cardRepository.Insert(value);
         }
 
         // PUT api/<CardController>/5

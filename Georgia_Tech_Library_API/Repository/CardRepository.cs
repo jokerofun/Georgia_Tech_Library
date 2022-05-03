@@ -1,15 +1,15 @@
 ﻿using Dapper;
+using Georgia_Tech_Library_API.Helpers;
 using Georgia_Tech_Library_API.Models;
-using Microsoft.Data.SqlClient;
 
 namespace Georgia_Tech_Library_API.Repository
 {
     public class CardRepository : ICardRepository
     {
-        private readonly IConfiguration _configuration;
-        public CardRepository(IConfiguration configuration)
+        private IDbConnectionFactory _dbConnectionFactory;
+        public CardRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            _configuration = configuration;
+            _dbConnectionFactory = dbConnectionFactory;
         }
 
         public Task<bool> Delete(Card obj)
@@ -19,13 +19,12 @@ namespace Georgia_Tech_Library_API.Repository
 
         public async Task<IEnumerable<Card>> GetAll()
         {
-            var sql = "SELECT * FROM Card";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("GeorgiaTechLibraryAPI")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<Card>(sql);
-                return result.ToList();
-            }
+            var sql = "SELECT CardNumber, DateOfIssue, ExpirationDay FROM Card";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            var result = await connection.QueryAsync<Card>(sql);
+            return result.ToList();
         }
 
         public Task<Card> GetCardByCardNumber(string cardNumber)
@@ -33,9 +32,14 @@ namespace Georgia_Tech_Library_API.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Card> Insert(Card obj)
+        public async Task<Card> Insert(Card obj)
         {
-            throw new NotImplementedException();
+            var sql = "insert into Card values (7, '20221110', '20220302');";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            var result = await connection.ExecuteAsync(sql);
+            return obj;
         }
 
         public Task<Card> Update(Card obj)

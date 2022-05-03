@@ -1,4 +1,7 @@
-﻿namespace Georgia_Tech_Library_API.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
+
+namespace Georgia_Tech_Library_API.Models
 {
     public class Card
     {

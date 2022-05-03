@@ -1,16 +1,15 @@
+using Georgia_Tech_Library_API.Helpers;
 using Georgia_Tech_Library_API.Repository;
-using Microsoft.Data.SqlClient;
-using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI") ?? "Server=localhost;Database=GeorgiaTechLibrary";
-builder.Services.AddScoped(_ => new SqlConnection(connectionString));
-//builder.Services.AddTransient<IDbConnection>((sp) => new SqlConnection(connectionString));
-//builder.Services.AddScoped<ICardRepository, CardRepository>();
+builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>(factory => new DbConnectionFactory(connectionString));
+builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
