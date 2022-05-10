@@ -6,7 +6,7 @@ namespace Georgia_Tech_Library_API.Repository
 {
     public class CardRepository : ICardRepository
     {
-        private IDbConnectionFactory _dbConnectionFactory;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
         public CardRepository(IDbConnectionFactory dbConnectionFactory)
         {
             _dbConnectionFactory = dbConnectionFactory;
