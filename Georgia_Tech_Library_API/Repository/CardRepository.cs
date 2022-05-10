@@ -12,7 +12,7 @@ namespace Georgia_Tech_Library_API.Repository
             _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public Task<bool> Delete(Card obj)
+        public Task<int> Delete(Card obj)
         {
             throw new NotImplementedException();
         }
@@ -32,17 +32,17 @@ namespace Georgia_Tech_Library_API.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Card> Insert(Card obj)
+        public async Task<int> Insert(Card obj)
         {
             var sql = "insert into Card values (7, '20221110', '20220302');";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
-            var result = await connection.ExecuteAsync(sql);
-            return obj;
+            return await connection.ExecuteAsync(sql);
+            
         }
 
-        public Task<Card> Update(Card obj)
+        public Task<int> Update(Card obj)
         {
             throw new NotImplementedException();
         }

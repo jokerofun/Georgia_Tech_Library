@@ -1,3 +1,5 @@
+using Georgia_Tech_Library_API.Business;
+using Georgia_Tech_Library_API.Business.Interfaces;
 using Georgia_Tech_Library_API.Helpers;
 using Georgia_Tech_Library_API.Repository;
 
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI") ?? "Server=localhost;Database=GeorgiaTechLibrary";
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>(factory => new DbConnectionFactory(connectionString));
 builder.Services.AddTransient<ICardRepository, CardRepository>();
+builder.Services.AddTransient<ICardManagement, CardManagement>();
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

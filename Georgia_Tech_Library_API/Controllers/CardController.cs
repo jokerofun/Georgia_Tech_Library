@@ -1,5 +1,5 @@
-﻿using Georgia_Tech_Library_API.Models;
-using Georgia_Tech_Library_API.Repository;
+﻿using Georgia_Tech_Library_API.Business.Interfaces;
+using Georgia_Tech_Library_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,43 +10,87 @@ namespace Georgia_Tech_Library_API.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        private readonly ICardRepository _cardRepository;
-        public CardController(ICardRepository cardRepository)
+        private readonly ICardManagement cardManagement;
+        public CardController(ICardManagement cardManagement)
         {
-            _cardRepository = cardRepository;
+            this.cardManagement = cardManagement;
         }
 
-        // GET: api/<CardController>
         [HttpGet]
-        public async Task<IEnumerable<Card>> Get()
+        [Route("/api/[controller]/GetList")]
+        [ProducesResponseType(typeof(Card[]), StatusCodes.Status200OK)]
+        [Produces("application/json", "text/plain", "text/json")]
+        public async Task<ActionResult<IEnumerable<Card>>> GetCards()
         {
-            return await _cardRepository.GetAll();
+            return Ok(await cardManagement.GetAll());
         }
 
-        // GET api/<CardController>/5
+        [HttpGet]
+        [Route("/api/[controller]/GetByCardNumber/{cardNumber}")]
+        [ProducesResponseType(typeof(Card), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Produces("application/json", "text/plain", "text/json")]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Card>> GetCardByCardNumber(string cardNumber)
         {
-            return "value";
+            var result = await cardManagement.GetCardByCardNumber(cardNumber);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
-        // POST api/<CardController>
         [HttpPost]
-        public async Task<Card> Post([FromBody] Card value)
+        [Route("/api/[controller]/Insert")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Produces("application/json", "text/plain", "text/json")]
+        public async Task<IActionResult> Insert([FromBody] Card card)
         {
-            return await _cardRepository.Insert(value);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (await cardManagement.Insert(card) == 0)
+            {
+                throw new Exception();
+            }
+            else return Ok();
+
+        }
+        [HttpPut]
+        [Route("/api/[controller]/Update")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Produces("application/json", "text/plain", "text/json")]
+        public async Task<IActionResult> Update([FromBody] Card card)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (await cardManagement.Update(card) == 0)
+            {
+                return NotFound();
+            }
+            else return Ok();
         }
 
-        // PUT api/<CardController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpDelete]
+        [Route("/api/[controller]/Delete")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Produces("application/json", "text/plain", "text/json")]
+        public async Task<IActionResult> Delete([FromBody] Card card)
         {
-        }
-
-        // DELETE api/<CardController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (await cardManagement.Delete(card) == 0)
+            {
+                return NotFound();
+            }
+            else return Ok();
         }
     }
 }
