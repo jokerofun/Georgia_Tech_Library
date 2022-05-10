@@ -12,9 +12,13 @@ namespace Georgia_Tech_Library_API.Repository
             _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public Task<int> Delete(Card obj)
+        public async Task<int> Delete(Card obj)
         {
-            throw new NotImplementedException();
+            var sql = "DELETE FROM Card WHERE CardNumber = @CardNumber";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            return await connection.ExecuteAsync(sql, new {obj.CardNumber});
         }
 
         public async Task<IEnumerable<Card>> GetAll()
@@ -27,24 +31,32 @@ namespace Georgia_Tech_Library_API.Repository
             return result.ToList();
         }
 
-        public Task<Card> GetCardByCardNumber(string cardNumber)
+        public async Task<Card> GetCardByCardNumber(string cardNumber)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT CardNumber, DateOfIssue, ExpirationDay FROM Card WHERE CardNumber = @CardNumber";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            var result = await connection.QuerySingleOrDefaultAsync<Card>(sql, new { cardNumber });
+            return result;
         }
 
         public async Task<int> Insert(Card obj)
         {
-            var sql = "insert into Card values (7, '20221110', '20220302');";
+            var sql = "insert into Card values (@CardNumber, @DateOfIssue, @ExpirationDay);";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
-            return await connection.ExecuteAsync(sql);
-            
+            return await connection.ExecuteAsync(sql, new { obj.CardNumber, obj.DateOfIssue, obj.ExpirationDay });
         }
 
-        public Task<int> Update(Card obj)
+        public async Task<int> Update(Card obj)
         {
-            throw new NotImplementedException();
+            var sql = "update Card set @DateOfIssue, @ExpirationDay WHERE CardNumber = @CardNumber;";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            return await connection.ExecuteAsync(sql, new { obj.DateOfIssue, obj.ExpirationDay, obj.CardNumber });
         }
     }
 }
