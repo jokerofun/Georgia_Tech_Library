@@ -30,7 +30,6 @@ namespace Georgia_Tech_Library_API.Controllers
         [ProducesResponseType(typeof(Card), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces("application/json", "text/plain", "text/json")]
-        [HttpGet("{id}")]
         public async Task<ActionResult<Card>> GetCardByCardNumber(string cardNumber)
         {
             var result = await cardManagement.GetCardByCardNumber(cardNumber);

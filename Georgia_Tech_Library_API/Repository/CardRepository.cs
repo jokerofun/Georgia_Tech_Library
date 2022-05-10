@@ -52,7 +52,7 @@ namespace Georgia_Tech_Library_API.Repository
 
         public async Task<int> Update(Card obj)
         {
-            var sql = "update Card set @DateOfIssue, @ExpirationDay WHERE CardNumber = @CardNumber;";
+            var sql = "update Card set DateOfIssue = @DateOfIssue, ExpirationDay = @ExpirationDay WHERE CardNumber = @CardNumber;";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
