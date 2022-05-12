@@ -18,7 +18,7 @@ namespace Georgia_Tech_Library_Test
         public async Task Test1()
         {
             var response = await _client.GetAndDeserialize<Card[]>("api/Card/GetList");
-            response.Count().ShouldBe(2);
+            response.Length.ShouldBeGreaterThan(0);
         }
     }
 }
