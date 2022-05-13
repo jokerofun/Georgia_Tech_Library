@@ -40,7 +40,7 @@ if (!app.Environment.IsDevelopment())
 
 if (app.Environment.EnvironmentName.Equals("Testing"))
 {
-    var connString = "Server=localhost;Database=master;TrustServerCertificate=True;User=sa;Password=Pass~w0r8";
+    var connString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryDBSetup") ?? builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI");
 
     using SqlConnection conn = new(connString);
     var filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
