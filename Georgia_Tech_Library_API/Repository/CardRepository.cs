@@ -12,15 +12,6 @@ namespace Georgia_Tech_Library_API.Repository
             _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public async Task<int> Delete(Card obj)
-        {
-            var sql = "DELETE FROM Card WHERE CardNumber = @CardNumber";
-
-            using var connection = _dbConnectionFactory.CreateSqlConnection();
-            connection.Open();
-            return await connection.ExecuteAsync(sql, new {obj.CardNumber});
-        }
-
         public async Task<IEnumerable<Card>> GetAll()
         {
             var sql = "SELECT CardNumber, DateOfIssue, ExpirationDay FROM Card";
@@ -43,7 +34,7 @@ namespace Georgia_Tech_Library_API.Repository
 
         public async Task<int> Insert(Card obj)
         {
-            var sql = "insert into Card values (@CardNumber, @DateOfIssue, @ExpirationDay);";
+            var sql = "INSERT into Card values (@CardNumber, @DateOfIssue, @ExpirationDay);";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
@@ -52,11 +43,20 @@ namespace Georgia_Tech_Library_API.Repository
 
         public async Task<int> Update(Card obj)
         {
-            var sql = "update Card set @DateOfIssue, @ExpirationDay WHERE CardNumber = @CardNumber;";
+            var sql = "UPDATE Card set @DateOfIssue, @ExpirationDay WHERE CardNumber = @CardNumber;";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
             return await connection.ExecuteAsync(sql, new { obj.DateOfIssue, obj.ExpirationDay, obj.CardNumber });
+        }
+
+        public async Task<int> Delete(Card obj)
+        {
+            var sql = "DELETE FROM Card WHERE CardNumber = @CardNumber";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            return await connection.ExecuteAsync(sql, new { obj.CardNumber });
         }
     }
 }

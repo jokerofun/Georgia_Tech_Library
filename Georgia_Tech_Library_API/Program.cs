@@ -11,6 +11,8 @@ var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLib
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>(factory => new DbConnectionFactory(connectionString));
 builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<ICardManagement, CardManagement>();
+builder.Services.AddTransient<IItemRepository, ItemRepository>();
+builder.Services.AddTransient<IItemManagement, ItemManagement>();
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
