@@ -40,7 +40,9 @@ if (!app.Environment.IsDevelopment())
 
 if (app.Environment.EnvironmentName.Equals("Testing"))
 {
-    using SqlConnection conn = new(connectionString);
+    var connString = "Server=localhost;Database=master;TrustServerCertificate=True;User=sa;Password=Pass~w0r8";
+
+    using SqlConnection conn = new(connString);
     var filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
     filePath = Directory.GetParent(Directory.GetParent(Directory.GetParent(filePath).FullName).FullName).FullName;
     filePath = Path.Combine(filePath, "DatabaseInitialize.sql");
