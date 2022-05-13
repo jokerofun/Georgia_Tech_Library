@@ -5,6 +5,8 @@ using Georgia_Tech_Library_API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json");
+
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI");
