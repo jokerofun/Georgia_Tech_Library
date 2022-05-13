@@ -2,6 +2,9 @@ using Georgia_Tech_Library_API.Business;
 using Georgia_Tech_Library_API.Business.Interfaces;
 using Georgia_Tech_Library_API.Helpers;
 using Georgia_Tech_Library_API.Repository;
+using Microsoft.Data.SqlClient;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +36,17 @@ if (app.Environment.IsDevelopment())
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error");
+}
+
+if (app.Environment.EnvironmentName.Equals("Testing"))
+{
+    using SqlConnection conn = new(connectionString);
+    var filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+    filePath = Directory.GetParent(Directory.GetParent(Directory.GetParent(filePath).FullName).FullName).FullName;
+    filePath = Path.Combine(filePath, "DatabaseInitialize.sql");
+    string script = File.ReadAllText(filePath);
+    Server server = new(new ServerConnection(conn));
+    server.ConnectionContext.ExecuteNonQuery(script);
 }
 
 app.MapGet("/error", () => Results.Problem("An error occured.", statusCode: 500)).ExcludeFromDescription();
