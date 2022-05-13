@@ -5,9 +5,11 @@ using Georgia_Tech_Library_API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json");
+
 // Add services to the container.
 
-var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI") ?? "Server=localhost;Database=GeorgiaTechLibrary";
+var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI");
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>(factory => new DbConnectionFactory(connectionString));
 builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<ICardManagement, CardManagement>();
@@ -42,3 +44,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
