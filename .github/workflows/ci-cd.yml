@@ -29,6 +29,14 @@ jobs:
             # Disabling shallow clone is recommended for improving relevancy of reporting for sonarcloud
             fetch-depth: 0
 
+      - name: Start SQL Server
+        run: |
+          docker run -d -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Pass~w0r8' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest 
+      - name: Sleep for 5 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: 5s
+
       - name: SonarScanner for .NET 6 with pull request decoration support
         uses: highbyte/sonarscan-dotnet@v2.1.2
         with:
