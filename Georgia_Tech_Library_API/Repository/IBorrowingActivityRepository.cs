@@ -6,5 +6,6 @@ namespace Georgia_Tech_Library_API.Repository
     {
         Task<BorrowingActivity> GetBorrowingActivitiesByMember(string SSN);
         Task<BorrowingActivity> GetBorrowingActivitiesByISBN(string ISBN);
+        Task<int> LoanItem(BorrowingActivity obj);
     }
 }

@@ -22,12 +22,12 @@ namespace Georgia_Tech_Library_API.Repository
             return result.ToList();
         }
 
-        public async Task<Item> GetItemByISBN(string ISBN)
+        public Task<Item> GetItemByISBN(string ISBN)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<int> Insert(Item obj)
+        public Task<int> Insert(Item obj)
         {
             throw new NotImplementedException();
         }

@@ -19,7 +19,7 @@ namespace Georgia_Tech_Library_API.Controllers
         [Route("/api/[controller]/GetList")]
         [ProducesResponseType(typeof(ItemDto[]), StatusCodes.Status200OK)]
         [Produces("application/json", "text/plain", "text/json")]
-        public async Task<ActionResult<IEnumerable<ItemDto>>> GetCards()
+        public async Task<ActionResult<IEnumerable<ItemDto>>> GetItems()
         {
             return Ok(await itemManagement.GetAllDtos());
         }

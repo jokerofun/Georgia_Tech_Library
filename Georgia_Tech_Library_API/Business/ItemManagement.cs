@@ -47,12 +47,12 @@ namespace Georgia_Tech_Library_API.Business
         }
 
         //needs refactoring
-        private async Task<IEnumerable<ItemDto>> CreateItemDto(IEnumerable<Item> items, IEnumerable<Author> authors, IEnumerable<ItemSubject> itemSubjects)
+        private static async Task<IEnumerable<ItemDto>> CreateItemDto(IEnumerable<Item> items, IEnumerable<Author> authors, IEnumerable<ItemSubject> itemSubjects)
         {
-            List < ItemDto > itemDtos = new List<ItemDto>();
+            List < ItemDto > itemDtos = new();
             foreach (Item item in items)
             {
-                ItemDto itemDto = new ItemDto(item);
+                ItemDto itemDto = new(item);
                 foreach(Author author in authors)
                 {
                     if (item.ISBN == author.ISBN)

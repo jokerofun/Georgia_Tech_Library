@@ -36,7 +36,7 @@ namespace Georgia_Tech_Library_API.ExceptionMiddleware
                 await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
             }
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception, string message, HttpStatusCode httpStatusCode)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception, string message, HttpStatusCode httpStatusCode)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)httpStatusCode;

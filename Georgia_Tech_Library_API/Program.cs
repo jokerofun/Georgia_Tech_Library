@@ -14,11 +14,18 @@ builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.Environment
 
 var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI");
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>(factory => new DbConnectionFactory(connectionString));
+builder.Services.AddControllers();
+//Injection of Managmenets and Repositories
 builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<ICardManagement, CardManagement>();
 builder.Services.AddTransient<IItemRepository, ItemRepository>();
 builder.Services.AddTransient<IItemManagement, ItemManagement>();
-builder.Services.AddControllers();
+builder.Services.AddTransient<ICatalogRepository, CatalogRepository>();
+builder.Services.AddTransient<ICatalogManagement, CatalogManagement>();
+builder.Services.AddTransient<IBorrowingActivityRepository, BorrowingActivityRepository>();
+builder.Services.AddTransient<IBorrowingActivityManagement, BorrowingActivityManagement>();
+builder.Services.AddTransient<IMemberRepository, MemberRepository>();
+builder.Services.AddTransient<IMemberManagement, MemberManagement>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
