@@ -34,7 +34,7 @@ namespace Georgia_Tech_Library_API.Repository
 
         public async Task<int> Update(Item obj)
         {
-            var sql = "UPDATE Item set @Title, @Publisher, @Edition, @DateOfPublishing, @Type WHERE ISBN = @ISBN;";
+            var sql = "UPDATE Item set Title = @Title, Publisher = @Publisher, Edition = @Edition, DateOfPublishing = @DateOfPublishing, Type = @Type WHERE ISBN = @ISBN;";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();

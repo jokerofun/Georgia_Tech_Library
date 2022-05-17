@@ -10,5 +10,8 @@ namespace Georgia_Tech_Library_Test.Utils
         {
             return client.GetFromJsonAsync<T>(requestUri);
         }
+
+        public static Task<HttpResponseMessage> DeleteAsJsonAsync<T>(this HttpClient httpClient, string requestUri, T data)
+        => httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Delete, requestUri) { Content = JsonContent.Create(data) });
     }
 }
