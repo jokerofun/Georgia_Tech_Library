@@ -25,6 +25,7 @@ namespace Georgia_Tech_Library_API.Repository
             var result = await connection.QueryAsync<Item, ItemType, Item>(sql, (item, type) => { item.ItemType = type; return item; }, splitOn: "Name");
             return result.ToList();
             */
+            //stored procedure maybe
             throw new NotImplementedException();
         }
 

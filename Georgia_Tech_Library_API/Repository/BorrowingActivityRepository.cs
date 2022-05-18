@@ -65,5 +65,16 @@ namespace Georgia_Tech_Library_API.Repository
             transaction.Commit();
             return affected;
         }
+        /*
+        public async Task<IEnumerable<BorrowingActivity>> GetMostPopularBooks(int amount)
+        {
+            
+             var procedure = "[Sales by Year]";
+             var values = new { Beginning_Date = "2017.1.1", Ending_Date = "2017.12.31" };
+             var results = connection.Query(procedure, values, commandType: CommandType.StoredProcedure).ToList();
+             results.ForEach(r => Console.WriteLine($"{r.OrderID} {r.Subtotal}"));
+            
+        }
+            */
     }
 }

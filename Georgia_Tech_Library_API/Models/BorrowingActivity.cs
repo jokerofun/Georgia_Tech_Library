@@ -2,6 +2,7 @@
 {
     public class BorrowingActivity
     {
+        public int Id { get; set; }
         public string SSN { get; set; }
         public string ISBN { get; set; }
         public string LibraryName { get; set; }
