@@ -18,7 +18,7 @@ namespace Georgia_Tech_Library_API.Business
             return await cardRepository.GetAll();
         }
 
-        public async Task<Card> GetCardByCardNumber(string cardNumber)
+        public async Task<Card?> GetCardByCardNumber(string cardNumber)
         {
             return await cardRepository.GetCardByCardNumber(cardNumber);
         }

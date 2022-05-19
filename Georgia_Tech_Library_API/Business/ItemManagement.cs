@@ -26,9 +26,9 @@ namespace Georgia_Tech_Library_API.Business
             return await CreateItemDto(items, authors, itemSubjects);
         }
 
-        public Task<Item> GetItemByISBN(string ISBN)
+        public async Task<Item?> GetItemByISBN(string ISBN)
         {
-            throw new NotImplementedException();
+            return await itemRepository.GetItemByISBN(ISBN);
         }
 
         public Task<int> Insert(Item obj)

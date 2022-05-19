@@ -11,10 +11,12 @@ namespace Georgia_Tech_Library_API.Controllers
     {
         private readonly IBorrowingActivityManagement borrowingActivityManagement;
         private readonly IMemberManagement memberManagement;
-        public BorrowingActivityController(IBorrowingActivityManagement borrowingActivityManagement, IMemberManagement memberManagement)
+        private readonly IItemManagement itemManagement;
+        public BorrowingActivityController(IBorrowingActivityManagement borrowingActivityManagement, IMemberManagement memberManagement, IItemManagement itemManagement)
         {
             this.borrowingActivityManagement = borrowingActivityManagement;
-            this.memberManagement = memberManagement;   
+            this.memberManagement = memberManagement;  
+            this.itemManagement = itemManagement;
         }
 
         [HttpGet]
@@ -33,12 +35,21 @@ namespace Georgia_Tech_Library_API.Controllers
         [Produces("application/json", "text/plain", "text/json")]
         public async Task<IActionResult> LoanItem(string SSN, string ISBN, string libraryName)
         {
+            Item? item = await itemManagement.GetItemByISBN(ISBN);
+            if (item == null)
+            {
+                return NotFound("The item with ISBN " + ISBN + " was not found.");
+            }
+            else if (item.ItemType.Lendable == false)
+            {
+                return BadRequest("This item is not lendable.");
+            }
+
             Member member = await memberManagement.GetMemberBySSN(SSN);
-            /* if (memberRepository.....)
+            if (member == null)
              {
-                 return NotFound(SSN);
+                 return NotFound("The member with SSN " + SSN + " was not found.");
              }
-            */
 
             await borrowingActivityManagement.LoanItem(member, ISBN, libraryName);
 

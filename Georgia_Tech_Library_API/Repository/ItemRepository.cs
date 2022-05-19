@@ -22,9 +22,19 @@ namespace Georgia_Tech_Library_API.Repository
             return result.ToList();
         }
 
-        public Task<Item> GetItemByISBN(string ISBN)
+        //Add subjects and authors
+        public async Task<Item?> GetItemByISBN(string ISBN)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT ISBN, Title, Publisher, Edition, DateOfPublishing, t.Name, t.Lendable FROM Item INNER JOIN Type t ON Item.Type = t.Name WHERE ISBN = @ISBN";
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            var result = await connection.QueryAsync<Item, ItemType, Item>(sql, (item, type) => { item.ItemType = type; return item; }, new { ISBN }, splitOn: "Name");
+            if (result.Count() == 0)
+            {
+                return null;
+            }
+            return (Item) result;
         }
 
         public Task<int> Insert(Item obj)

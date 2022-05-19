@@ -22,7 +22,7 @@ namespace Georgia_Tech_Library_API.Repository
             return result.ToList();
         }
 
-        public async Task<Card> GetCardByCardNumber(string cardNumber)
+        public async Task<Card?> GetCardByCardNumber(string cardNumber)
         {
             var sql = "SELECT CardNumber, DateOfIssue, ExpirationDay FROM Card WHERE CardNumber = @CardNumber";
 
