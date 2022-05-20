@@ -25,7 +25,7 @@ namespace Georgia_Tech_Library_API.Repository
         //Add subjects and authors
         public async Task<Item?> GetItemByISBN(string ISBN)
         {
-            var sql = "SELECT ISBN, Title, Publisher, Edition, DateOfPublishing, t.Name, t.Lendable FROM Item INNER JOIN Type t ON Item.Type = t.Name WHERE ISBN = @ISBN";
+            var sql = "SELECT ISBN, Title, Publisher, Edition, DateOfPublishing, t.Name, t.Lendable FROM Item JOIN Type t ON Item.Type = t.Name WHERE ISBN = @ISBN";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
@@ -34,7 +34,7 @@ namespace Georgia_Tech_Library_API.Repository
             {
                 return null;
             }
-            return (Item) result;
+            return result.First();
         }
 
         public Task<int> Insert(Item obj)

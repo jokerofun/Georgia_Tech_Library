@@ -17,7 +17,7 @@ namespace Georgia_Tech_Library_API.Business
             throw new NotImplementedException();
         }
 
-        public async Task<Member> GetMemberBySSN(string SSN)
+        public async Task<Member?> GetMemberBySSN(string SSN)
         {
             return await memberRepository.GetMemberBySSN(SSN);
         }

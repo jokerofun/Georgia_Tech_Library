@@ -4,6 +4,6 @@ namespace Georgia_Tech_Library_API.Business.Interfaces
 {
     public interface IMemberManagement : IGenericManagement<Member>
     {
-        Task<Member> GetMemberBySSN(string SSN);
+        Task<Member?> GetMemberBySSN(string SSN);
     }
 }

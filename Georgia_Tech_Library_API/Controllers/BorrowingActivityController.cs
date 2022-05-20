@@ -44,8 +44,8 @@ namespace Georgia_Tech_Library_API.Controllers
             {
                 return BadRequest("This item is not lendable.");
             }
-
-            Member member = await memberManagement.GetMemberBySSN(SSN);
+           
+            Member? member = await memberManagement.GetMemberBySSN(SSN);
             if (member == null)
              {
                  return NotFound("The member with SSN " + SSN + " was not found.");

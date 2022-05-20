@@ -1,4 +1,5 @@
-﻿using Georgia_Tech_Library_API.Helpers;
+﻿using Dapper;
+using Georgia_Tech_Library_API.Helpers;
 using Georgia_Tech_Library_API.Models;
 
 namespace Georgia_Tech_Library_API.Repository
@@ -16,17 +17,20 @@ namespace Georgia_Tech_Library_API.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Member> GetMemberBySSN(string SSN)
-        {/*
-            var sql = "SELECT ISBN, Title, Publisher, Edition, DateOfPublishing, t.Name, t.Lendable FROM Item INNER JOIN Type t ON Item.Type = t.Name";
+        public async Task<Member?> GetMemberBySSN(string SSN)
+        {
+            var sql = "SELECT m.SSN, m.FirstName, m.LastName, m.Email, m.Phone, m.Street, m.City, m.ZipCode, m.CampusName, " +
+                      "r.Name, r.GracePeriod, r.ReturnPeriod, c.CardNumber, c.DateOfIssue, c.ExpirationDay " +
+                      "FROM Member m JOIN Role r ON m.RoleName = r.Name JOIN Card c ON m.CardNumber = c.CardNumber";
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
-            var result = await connection.QueryAsync<Item, ItemType, Item>(sql, (item, type) => { item.ItemType = type; return item; }, splitOn: "Name");
-            return result.ToList();
-            */
-            //stored procedure maybe
-            throw new NotImplementedException();
+            var result = await connection.QueryAsync<Member, Role, Card, Member>(sql, (member, role, card) => { member.Role = role; member.Card = card; return member; }, splitOn: "Name, CardNumber");
+            if (result.Count() == 0)
+            {
+                return null;
+            }
+            return result.First();
         }
 
         public Task<int> Insert(Member obj)
