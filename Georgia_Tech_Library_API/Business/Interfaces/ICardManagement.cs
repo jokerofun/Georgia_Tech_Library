@@ -1,8 +1,8 @@
 ﻿using Georgia_Tech_Library_API.Models;
 
-namespace Georgia_Tech_Library_API.Repository
+namespace Georgia_Tech_Library_API.Business.Interfaces
 {
-    public interface ICardRepository : IGenericRepository<Card>
+    public interface ICardManagement : IGenericManagement<Card>
     {
         Task<Card?> GetCardByCardNumber(string cardNumber);
     }

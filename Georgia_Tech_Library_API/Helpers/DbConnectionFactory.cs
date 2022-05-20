@@ -5,7 +5,7 @@ namespace Georgia_Tech_Library_API.Helpers
 {
     public class DbConnectionFactory : IDbConnectionFactory
     {
-        private string _connectionString;
+        private readonly string _connectionString;
         public DbConnectionFactory(string connectionString)
         {
             _connectionString = connectionString;

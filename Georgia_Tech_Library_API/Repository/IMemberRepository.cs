@@ -4,6 +4,6 @@ namespace Georgia_Tech_Library_API.Repository
 {
     public interface IMemberRepository : IGenericRepository<Member>
     {
-        Task<Member> GetMemberBySSN(string SSN);
+        Task<Member?> GetMemberBySSN(string SSN);
     }
 }

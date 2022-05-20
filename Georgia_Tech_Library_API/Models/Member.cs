@@ -10,7 +10,7 @@
         public string Street { get; set; }
         public string City { get; set; }
         public string Zip_Code { get; set; }
-        public Campus Campus { get; set; }
+        public string CampusName { get; set; }
         public Role Role { get; set; }
         public Card Card { get; set; }
     }

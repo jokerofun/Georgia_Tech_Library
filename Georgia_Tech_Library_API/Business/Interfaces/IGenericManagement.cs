@@ -1,6 +1,6 @@
-﻿namespace Georgia_Tech_Library_API.Repository
+﻿namespace Georgia_Tech_Library_API.Business.Interfaces
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericManagement<T> where T : class
     {
         Task<IEnumerable<T>> GetAll();
         Task<int> Insert(T obj);

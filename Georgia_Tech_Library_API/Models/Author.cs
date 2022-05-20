@@ -4,6 +4,18 @@
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Item Item { get; set; }
+        public string ISBN { get; set; }
+    }
+
+    public class AuthorDto
+    {
+        public AuthorDto(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

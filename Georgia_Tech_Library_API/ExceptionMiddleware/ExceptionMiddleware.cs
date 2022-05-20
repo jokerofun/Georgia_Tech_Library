@@ -24,7 +24,7 @@ namespace Georgia_Tech_Library_API.ExceptionMiddleware
             catch (SqlException ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-                string message = "There was a problem with the database, please refresh the page and try again";
+                string message = "Please check if the data you provided is correct";
                 HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
                 await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
             }
@@ -36,7 +36,7 @@ namespace Georgia_Tech_Library_API.ExceptionMiddleware
                 await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
             }
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception, string message, HttpStatusCode httpStatusCode)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception, string message, HttpStatusCode httpStatusCode)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)httpStatusCode;

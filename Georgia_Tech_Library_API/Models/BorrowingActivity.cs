@@ -2,10 +2,12 @@
 {
     public class BorrowingActivity
     {
-        public Member Member { get; set; }
-        public Catalog Catalog { get; set; }
-        public DateTime BorrowingDate { get; set; }
+        public int Id { get; set; }
+        public string SSN { get; set; }
+        public string ISBN { get; set; }
+        public string LibraryName { get; set; }
+        public DateTime BorrowingDate { get; set; } = DateTime.Now;
         public DateTime DueDate { get; set; }
-        public DateTime DayOfReturn { get; set; }
+        public DateTime? DateOfReturn { get; set; } = null;
     }
 }
