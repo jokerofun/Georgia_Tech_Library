@@ -46,22 +46,23 @@ namespace Georgia_Tech_Library_API.Business
             throw new NotImplementedException();
         }
 
-        private static async Task<IEnumerable<ItemDto>> CreateItemDto(IEnumerable<Item> items, IEnumerable<Author> authors, IEnumerable<ItemSubject> itemSubjects)
+        public async Task<IEnumerable<ItemDto>> CreateItemDto(IEnumerable<Item> items, IEnumerable<Author> authors, IEnumerable<ItemSubject> itemSubjects)
         {
-            List < ItemDto > itemDtos = new();
-            List <Author> authorsList = authors.ToList();
-            List <ItemSubject> itemSubjectsList = itemSubjects.ToList();
+            List<ItemDto> itemDtos = new();
+            List<Author> authorsList = authors.ToList();
+            List<ItemSubject> itemSubjectsList = itemSubjects.ToList();
             foreach (Item item in items)
             {
                 ItemDto itemDto = new(item);
 
-                for (int i = authorsList.Count - 1; i >= 0; i--) {
+                for (int i = authorsList.Count - 1; i >= 0; i--)
+                {
                     if (item.ISBN == authorsList[i].ISBN)
                     {
-                        itemDto.Authors.Add(new AuthorDto (authorsList[i].FirstName, authorsList[i].LastName));
+                        itemDto.Authors.Add(new AuthorDto(authorsList[i].FirstName, authorsList[i].LastName));
                         authorsList.RemoveAt(i);
                     }
-                    }
+                }
                 for (int i = itemSubjectsList.Count - 1; i >= 0; i--)
                 {
                     if (item.ISBN == itemSubjectsList[i].ISBN)

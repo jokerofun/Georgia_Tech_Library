@@ -38,7 +38,7 @@ namespace Georgia_Tech_Library_API.Business
             BorrowingActivity borrowingActivity = new();
             borrowingActivity.SSN = member.SSN;
             borrowingActivity.ISBN = ISBN;
-            borrowingActivity.LibraryName = libraryName;   
+            borrowingActivity.LibraryName = libraryName;
             borrowingActivity.DueDate = borrowingActivity.BorrowingDate.AddDays(member.Role.ReturnPeriod);
 
             return await borrowingActivityRepository.LoanItem(borrowingActivity);

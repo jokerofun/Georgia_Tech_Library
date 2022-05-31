@@ -1,6 +1,5 @@
 ﻿using Georgia_Tech_Library_API.Business.Interfaces;
 using Georgia_Tech_Library_API.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Georgia_Tech_Library_API.Controllers
