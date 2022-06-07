@@ -52,6 +52,7 @@ namespace Georgia_Tech_Library_API.Controllers
                 return BadRequest(ModelState);
             }
 
+
             if (await cardManagement.Insert(card) == 0)
             {
                 throw new Exception();

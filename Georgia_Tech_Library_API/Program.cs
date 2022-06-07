@@ -1,20 +1,26 @@
 using Georgia_Tech_Library_API.Business;
 using Georgia_Tech_Library_API.Business.Interfaces;
+using Georgia_Tech_Library_API.ExceptionMiddleware;
 using Georgia_Tech_Library_API.Helpers;
+using Georgia_Tech_Library_API.LoggerService;
 using Georgia_Tech_Library_API.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
+using NLog;
+
+LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json");
 
 // Add services to the container.
-
 var connectionString = builder.Configuration.GetConnectionString("GeorgiaTechLibraryAPI");
 builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>(factory => new DbConnectionFactory(connectionString));
+builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 builder.Services.AddControllers();
+
 //Injection of Managmenets and Repositories
 builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<ICardManagement, CardManagement>();
@@ -61,6 +67,8 @@ if (app.Environment.EnvironmentName.Equals("Testing"))
 app.MapGet("/error", () => Results.Problem("An error occured.", statusCode: 500)).ExcludeFromDescription();
 
 app.UseHttpsRedirection();
+
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseAuthorization();
 

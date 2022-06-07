@@ -9,6 +9,7 @@ namespace Georgia_Tech_Library_API.Models
         [StringLength(12)]
         public string CardNumber { get; set; }
         [Required]
+        [DateGreaterThanYesterday()]
         public DateTime DateOfIssue { get; set; }
         [Required]
         [DateGreaterThan("DateOfIssue")]

@@ -23,10 +23,20 @@ namespace Georgia_Tech_Library_API.ExceptionMiddleware
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"Something went wrong: {ex}");
-                string message = "Please check if the data you provided is correct";
-                HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
-                await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
+                if (ex.Message.StartsWith("Violation of PRIMARY KEY constraint"))
+                {
+                    _logger.LogError($"Something went wrong: {ex}");
+                    string message = "Object with this value already exists";
+                    HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest;
+                    await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
+                }
+                else
+                {
+                    _logger.LogError($"Something went wrong: {ex}");
+                    string message = "Please check if the data you provided is correct";
+                    HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
+                    await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
+                }
             }
             catch (Exception ex)
             {
