@@ -74,6 +74,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors(x => x
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(origin => true) // allow any origin
+                                                        //.WithOrigins("https://localhost:44351/%22)); // Allow only this origin can also have multiple origins separated with comma
+                    .AllowCredentials()); // allow credentials);
+
+//app.Use((context, next) => { context.Response.Headers["Access-Control-Allow-Origin"] = "*"; return next.Invoke(); });
+
 app.Run();
 
 public partial class Program { }

@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
+import { useStore } from "./hooks/useStore";
+import { observer } from "mobx-react-lite";
+import MainContent from "./components/MainContent";
+import { Row, Container } from "react-bootstrap";
+import Navigation from "./components/Navigation";
 
-function App() {
+const App = observer(function App() {
+  const cardStore = useStore("cardStore");
+  const catalogStore = useStore("catalogStore");
+  const itemStore = useStore("itemStore");
+  const borrowingActivityStore = useStore("borrowingActivityStore");
+
+  function init() {
+    cardStore.fetch();
+    catalogStore.fetch();
+    itemStore.fetch();
+    // borrowingActivityStore.fetch();
+  }
+
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React NO
-        </a>
-      </header>
-    </div>
+    <Container fluid className="vh-100">
+      <Row className="h-20 bg-primary">
+        <Navigation />
+      </Row>
+      <Row className="h-80">
+        <MainContent />
+      </Row>
+    </Container>
   );
-}
+});
 
 export default App;
