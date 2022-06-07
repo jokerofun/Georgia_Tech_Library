@@ -1,6 +1,5 @@
 ﻿using Georgia_Tech_Library_API.Business.Interfaces;
 using Georgia_Tech_Library_API.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Georgia_Tech_Library_API.Controllers
@@ -15,7 +14,7 @@ namespace Georgia_Tech_Library_API.Controllers
         public BorrowingActivityController(IBorrowingActivityManagement borrowingActivityManagement, IMemberManagement memberManagement, IItemManagement itemManagement)
         {
             this.borrowingActivityManagement = borrowingActivityManagement;
-            this.memberManagement = memberManagement;  
+            this.memberManagement = memberManagement;
             this.itemManagement = itemManagement;
         }
 
@@ -44,12 +43,12 @@ namespace Georgia_Tech_Library_API.Controllers
             {
                 return BadRequest("This item is not lendable.");
             }
-           
+
             Member? member = await memberManagement.GetMemberBySSN(SSN);
             if (member == null)
-             {
-                 return NotFound("The member with SSN " + SSN + " was not found.");
-             }
+            {
+                return NotFound("The member with SSN " + SSN + " was not found.");
+            }
 
             await borrowingActivityManagement.LoanItem(member, ISBN, libraryName);
 

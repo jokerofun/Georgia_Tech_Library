@@ -1,4 +1,6 @@
-﻿namespace Georgia_Tech_Library_API.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Georgia_Tech_Library_API.Models
 {
     public class Item
     {
@@ -12,14 +14,21 @@
 
     public class ItemDto
     {
-
+        [Required]
         public string ISBN { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Edition { get; set; }
+        [Required]
         public string Publisher { get; set; }
+        [Required]
         public string DateOfPublishing { get; set; }
+        [Required]
         public ItemType ItemType { get; set; }
+        [Required]
         public List<AuthorDto> Authors { get; set; }
+        [Required]
         public List<Subject> Subjects { get; set; }
 
         public ItemDto(Item item)

@@ -8,7 +8,7 @@ namespace Georgia_Tech_Library_API.Business
     {
         private readonly ICardRepository cardRepository;
 
-            public CardManagement(ICardRepository cardRepository) 
+        public CardManagement(ICardRepository cardRepository)
         {
             this.cardRepository = cardRepository;
         }
