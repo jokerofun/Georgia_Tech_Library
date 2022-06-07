@@ -62,7 +62,7 @@ namespace Georgia_Tech_Library_Test
             #endregion
 
             #region Delete request and verify that it was successful
-            var deleteResponse = await _client.DeleteAsJsonAsync("api/Card/Delete", getResponse2);
+            var deleteResponse = await _client.DeleteAsync("api/Card/Delete/" + getResponse2.CardNumber);
 
             deleteResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
             #endregion
@@ -94,12 +94,7 @@ namespace Georgia_Tech_Library_Test
             #endregion
 
             #region Delete request and verify that it was not successful
-            var deleteResponse = await _client.DeleteAsJsonAsync("api/Card/Delete", new Card
-            {
-                CardNumber = "333",
-                DateOfIssue = DateTime.Today,
-                ExpirationDay = DateTime.Today.AddDays(2),
-            });
+            var deleteResponse = await _client.DeleteAsync("api/Card/Delete/333");
 
             deleteResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
             #endregion

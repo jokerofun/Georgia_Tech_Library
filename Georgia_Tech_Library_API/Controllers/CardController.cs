@@ -80,17 +80,19 @@ namespace Georgia_Tech_Library_API.Controllers
         }
 
         [HttpDelete]
-        [Route("/api/[controller]/Delete")]
+        [Route("/api/[controller]/Delete/{cardNumber}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces("application/json", "text/plain", "text/json")]
-        public async Task<IActionResult> Delete([FromBody] Card card)
+        public async Task<IActionResult> Delete(string cardNumber)
         {
-            if (await cardManagement.Delete(card) == 0)
+            var result = await cardManagement.GetCardByCardNumber(cardNumber);
+            if (result == null)
             {
                 return NotFound();
             }
-            else return Ok();
+            await cardManagement.Delete(result);
+            return Ok();
         }
     }
 }
