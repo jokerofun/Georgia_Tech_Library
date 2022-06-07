@@ -7,5 +7,6 @@ namespace Georgia_Tech_Library_API.Repository
         Task<Item?> GetItemByISBN(string ISBN);
         Task<IEnumerable<Author>> GetAuthors();
         Task<IEnumerable<ItemSubject>> GetSubjects();
+        Task<IEnumerable<Item>> GetBatch(int batchNumber);
     }
 }

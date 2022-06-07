@@ -25,8 +25,13 @@ namespace Georgia_Tech_Library_API.ExceptionMiddleware
             {
                 if (ex.Message.StartsWith("Violation of PRIMARY KEY constraint"))
                 {
-                    _logger.LogError($"Something went wrong: {ex}");
                     string message = "Object with this value already exists";
+                    HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest;
+                    await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
+                }
+                else if (ex.Message.StartsWith("Members can have only five books out at a time"))
+                {
+                    string message = "Member cannot have more than 5 items";
                     HttpStatusCode httpStatusCode = HttpStatusCode.BadRequest;
                     await HandleExceptionAsync(httpContext, ex, message, httpStatusCode);
                 }

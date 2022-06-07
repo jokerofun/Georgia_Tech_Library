@@ -22,6 +22,20 @@ namespace Georgia_Tech_Library_API.Repository
             return result.ToList();
         }
 
+        public async Task<IEnumerable<Item>> GetBatch(int batchNumber)
+        {
+            int from = 0;
+            if (batchNumber > 1)
+                from = 100 * (batchNumber - 1) + 1;
+            int until = 100 * batchNumber;
+            var sql = "SELECT ISBN, Title, Publisher, Edition, DateOfPublishing, t.Name, t.Lendable FROM(SELECT ROW_NUMBER() OVER(ORDER BY ISBN) as RowNum,*FROM Item) sub INNER JOIN Type t ON sub.Type = t.Name WHERE RowNum BETWEEN " + from + " AND " + until;
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+            var result = await connection.QueryAsync<Item, ItemType, Item>(sql, (item, type) => { item.ItemType = type; return item; }, splitOn: "Name");
+            return result.ToList();
+        }
+
         //Add subjects and authors
         public async Task<Item?> GetItemByISBN(string ISBN)
         {

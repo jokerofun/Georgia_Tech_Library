@@ -26,6 +26,14 @@ namespace Georgia_Tech_Library_API.Business
             return await CreateItemDto(items, authors, itemSubjects);
         }
 
+        public async Task<IEnumerable<ItemDto>> GetBatch(int batchNumber)
+        {
+            IEnumerable<Item> items = await itemRepository.GetBatch(batchNumber);
+            IEnumerable<Author> authors = await itemRepository.GetAuthors();
+            IEnumerable<ItemSubject> itemSubjects = await itemRepository.GetSubjects();
+            return await CreateItemDto(items, authors, itemSubjects);
+        }
+
         public async Task<Item?> GetItemByISBN(string ISBN)
         {
             return await itemRepository.GetItemByISBN(ISBN);

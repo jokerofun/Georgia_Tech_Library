@@ -22,5 +22,13 @@ namespace Georgia_Tech_Library_API.Controllers
         {
             return Ok(await itemManagement.GetAllDtos());
         }
+        [HttpGet]
+        [Route("/api/[controller]/GetList/{batchNumber}")]
+        [ProducesResponseType(typeof(ItemDto[]), StatusCodes.Status200OK)]
+        [Produces("application/json", "text/plain", "text/json")]
+        public async Task<ActionResult<IEnumerable<ItemDto>>> GetBatch(int batchNumber)
+        {
+            return Ok(await itemManagement.GetBatch(batchNumber));
+        }
     }
 }
