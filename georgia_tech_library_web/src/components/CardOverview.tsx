@@ -78,6 +78,7 @@ const CardOverview = observer(function CardOverview() {
                 // await new Promise((resolve) => setTimeout(resolve, 1000));
                 await cardStore.fetch();
               }}
+              title="DeleteCard"
             >
               <DeleteIcon />
             </IconButton>
@@ -116,7 +117,7 @@ const CardOverview = observer(function CardOverview() {
             });
             setSelection(selectedRowData);
           }}
-          disableSelectionOnClick
+          //disableSelectionOnClick
         />
       </Paper>
     </Box>
