@@ -64,8 +64,9 @@ const CardOverview = observer(function CardOverview() {
               event.stopPropagation();
               navigate(`/cards/create`);
             }}
-          >
-            <AddIcon />
+            title="AddCard"
+          > 
+            <AddIcon/>
           </IconButton>
         </Tooltip>
 
