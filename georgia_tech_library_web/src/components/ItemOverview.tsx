@@ -16,6 +16,7 @@ import {
   DataGrid,
 } from "@mui/x-data-grid";
 import { ItemDto } from "../api";
+import React from "react";
 
 const columns: GridColDef[] = [
   {
@@ -68,6 +69,8 @@ const columns: GridColDef[] = [
 const ItemOverview = observer(function ItemOverview() {
   const itemStore = useStore("itemStore");
 
+  const [pageNumber, setPageNumber] = React.useState<number>(0);
+
   const navigate = useNavigate();
 
   // const [pageSize, setPageSize] = React.useState<number>(25);
@@ -104,15 +107,22 @@ const ItemOverview = observer(function ItemOverview() {
         }}
       >
         <DataGrid
+          density="compact"
           components={{ Toolbar: CustomToolbar }}
           rows={itemStore.items}
           columns={columns}
           getRowId={(i) => i.isbn}
+          rowCount={100000}
+          pagination
+          paginationMode="server"
           pageSize={100}
-          // onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          // rowsPerPageOptions={[10, 25, 50]}
           rowThreshold={0}
           checkboxSelection
+          page={pageNumber}
+          onPageChange={async (newPage) => {
+            await itemStore.fetchBatch(newPage);
+            setPageNumber(newPage);
+          }}
           // disableSelectionOnClick
         />
       </Paper>
