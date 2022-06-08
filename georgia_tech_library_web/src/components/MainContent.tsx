@@ -3,6 +3,8 @@ import { Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import CatalogOverview from "./CatalogOverview";
 import ItemOverview from "./ItemOverview";
+import CardOverview from "./CardOverview";
+import CardForm from "./CardForm";
 
 const MainContent = () => {
   return (
@@ -10,15 +12,8 @@ const MainContent = () => {
       <Routes>
         <Route path="/items" element={<ItemOverview />} />
         <Route path="/catalog" element={<CatalogOverview />} />
-        {/* <Route path="/oxygenPlants" element={<OxygenPlantOverview />} />
-        <Route
-          path="/healthFacilities/create"
-          element={<HealthFacilityForm />}
-        />
-        <Route path="/healthFacilities/edit" element={<HealthFacilityForm />} />
-        <Route path="/oxygenPlants/edit" element={<OxygenPlantForm />} />
-        <Route path="/oxygenPlants/create" element={<OxygenPlantForm />} />
-        <Route path="/locations/create" element={<LocationForm />} /> */}
+        <Route path="/cards" element={<CardOverview />} />
+        <Route path="/cards/create" element={<CardForm />} />
       </Routes>
     </Box>
   );

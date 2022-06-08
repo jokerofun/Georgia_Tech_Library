@@ -1,7 +1,7 @@
 import { CardApi } from "./../api/apis/CardApi";
 import { Card } from "./../api/models/index";
 import { IStore } from "./IStore";
-import { action, makeObservable, observable, ObservableMap } from "mobx";
+import { action, makeObservable, observable, ObservableMap, set } from "mobx";
 import { API_CONFIG } from "../config";
 
 export class CardStore extends IStore {
@@ -28,7 +28,7 @@ export class CardStore extends IStore {
     this._cards.replace(observable.map(cards.map((c) => [c.cardNumber, c])));
   }
 
-  //   public setSingleHealthFacility(healthFacility: HealthFacility): void {
-  //     set(this._cards, healthFacility.healthFacilityGuid, healthFacility);
-  //   }
+  public setSingleCard(card: Card): void {
+    set(this._cards, card.cardNumber, card);
+  }
 }
