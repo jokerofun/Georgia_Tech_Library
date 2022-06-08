@@ -14,8 +14,13 @@ export class ItemStore extends IStore {
     });
   }
 
-  public async fetch() {
+  public async fetchAll() {
     const items = await this._api.apiItemGetListGet();
+    this.setItems(items);
+  }
+
+  public async fetchBatch(batchNumber: number) {
+    const items = await this._api.apiItemGetListBatchNumberGet({ batchNumber });
     this.setItems(items);
   }
 

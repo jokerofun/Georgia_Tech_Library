@@ -19,6 +19,10 @@ import {
     ProblemDetails,
 } from '../models';
 
+export interface ApiBorrowingActivityGetListBatchNumberGetRequest {
+    batchNumber: number;
+}
+
 export interface ApiBorrowingActivityLoanItemPostRequest {
     sSN?: string;
     iSBN?: string;
@@ -32,6 +36,19 @@ export interface ApiBorrowingActivityLoanItemPostRequest {
  * @interface BorrowingActivityApiInterface
  */
 export interface BorrowingActivityApiInterface {
+    /**
+     * 
+     * @param {number} batchNumber 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BorrowingActivityApiInterface
+     */
+    apiBorrowingActivityGetListBatchNumberGetRaw(requestParameters: ApiBorrowingActivityGetListBatchNumberGetRequest): Promise<runtime.ApiResponse<Array<BorrowingActivity>>>;
+
+    /**
+     */
+    apiBorrowingActivityGetListBatchNumberGet(requestParameters: ApiBorrowingActivityGetListBatchNumberGetRequest): Promise<Array<BorrowingActivity>>;
+
     /**
      * 
      * @param {*} [options] Override http request option.
@@ -65,6 +82,34 @@ export interface BorrowingActivityApiInterface {
  * 
  */
 export class BorrowingActivityApi extends runtime.BaseAPI implements BorrowingActivityApiInterface {
+
+    /**
+     */
+    async apiBorrowingActivityGetListBatchNumberGetRaw(requestParameters: ApiBorrowingActivityGetListBatchNumberGetRequest): Promise<runtime.ApiResponse<Array<BorrowingActivity>>> {
+        if (requestParameters.batchNumber === null || requestParameters.batchNumber === undefined) {
+            throw new runtime.RequiredError('batchNumber','Required parameter requestParameters.batchNumber was null or undefined when calling apiBorrowingActivityGetListBatchNumberGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/BorrowingActivity/GetList/{batchNumber}`.replace(`{${"batchNumber"}}`, encodeURIComponent(String(requestParameters.batchNumber))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     */
+    async apiBorrowingActivityGetListBatchNumberGet(requestParameters: ApiBorrowingActivityGetListBatchNumberGetRequest): Promise<Array<BorrowingActivity>> {
+        const response = await this.apiBorrowingActivityGetListBatchNumberGetRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */

@@ -15,8 +15,14 @@ export class BorrowingActivityStore extends IStore {
     });
   }
 
-  public async fetch() {
+  public async fetchAll() {
     const bas = await this._api.apiBorrowingActivityGetListGet();
+    this.setBas(bas);
+  }
+  public async fetchBatch(batchNumber: number) {
+    const bas = await this._api.apiBorrowingActivityGetListBatchNumberGet({
+      batchNumber,
+    });
     this.setBas(bas);
   }
 

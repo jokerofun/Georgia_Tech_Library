@@ -19,8 +19,8 @@ import {
     ProblemDetails,
 } from '../models';
 
-export interface ApiCardDeleteDeleteRequest {
-    card?: Card;
+export interface ApiCardDeleteCardNumberDeleteRequest {
+    cardNumber: string;
 }
 
 export interface ApiCardGetByCardNumberCardNumberGetRequest {
@@ -44,16 +44,16 @@ export interface ApiCardUpdatePutRequest {
 export interface CardApiInterface {
     /**
      * 
-     * @param {Card} [card] 
+     * @param {string} cardNumber 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CardApiInterface
      */
-    apiCardDeleteDeleteRaw(requestParameters: ApiCardDeleteDeleteRequest): Promise<runtime.ApiResponse<void>>;
+    apiCardDeleteCardNumberDeleteRaw(requestParameters: ApiCardDeleteCardNumberDeleteRequest): Promise<runtime.ApiResponse<void>>;
 
     /**
      */
-    apiCardDeleteDelete(requestParameters: ApiCardDeleteDeleteRequest): Promise<void>;
+    apiCardDeleteCardNumberDelete(requestParameters: ApiCardDeleteCardNumberDeleteRequest): Promise<void>;
 
     /**
      * 
@@ -115,19 +115,20 @@ export class CardApi extends runtime.BaseAPI implements CardApiInterface {
 
     /**
      */
-    async apiCardDeleteDeleteRaw(requestParameters: ApiCardDeleteDeleteRequest): Promise<runtime.ApiResponse<void>> {
+    async apiCardDeleteCardNumberDeleteRaw(requestParameters: ApiCardDeleteCardNumberDeleteRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.cardNumber === null || requestParameters.cardNumber === undefined) {
+            throw new runtime.RequiredError('cardNumber','Required parameter requestParameters.cardNumber was null or undefined when calling apiCardDeleteCardNumberDelete.');
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
-
         const response = await this.request({
-            path: `/api/Card/Delete`,
+            path: `/api/Card/Delete/{cardNumber}`.replace(`{${"cardNumber"}}`, encodeURIComponent(String(requestParameters.cardNumber))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: requestParameters.card,
         });
 
         return new runtime.VoidApiResponse(response);
@@ -135,8 +136,8 @@ export class CardApi extends runtime.BaseAPI implements CardApiInterface {
 
     /**
      */
-    async apiCardDeleteDelete(requestParameters: ApiCardDeleteDeleteRequest): Promise<void> {
-        await this.apiCardDeleteDeleteRaw(requestParameters);
+    async apiCardDeleteCardNumberDelete(requestParameters: ApiCardDeleteCardNumberDeleteRequest): Promise<void> {
+        await this.apiCardDeleteCardNumberDeleteRaw(requestParameters);
     }
 
     /**

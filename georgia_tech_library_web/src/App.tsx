@@ -15,8 +15,8 @@ const App = observer(function App() {
   function init() {
     cardStore.fetch();
     catalogStore.fetch();
-    itemStore.fetch();
-    // borrowingActivityStore.fetch();
+    itemStore.fetchBatch(1);
+    borrowingActivityStore.fetchBatch(1);
   }
 
   useEffect(() => {

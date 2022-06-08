@@ -18,6 +18,10 @@ import {
     ItemDto,
 } from '../models';
 
+export interface ApiItemGetListBatchNumberGetRequest {
+    batchNumber: number;
+}
+
 /**
  * ItemApi - interface
  * 
@@ -25,6 +29,19 @@ import {
  * @interface ItemApiInterface
  */
 export interface ItemApiInterface {
+    /**
+     * 
+     * @param {number} batchNumber 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ItemApiInterface
+     */
+    apiItemGetListBatchNumberGetRaw(requestParameters: ApiItemGetListBatchNumberGetRequest): Promise<runtime.ApiResponse<Array<ItemDto>>>;
+
+    /**
+     */
+    apiItemGetListBatchNumberGet(requestParameters: ApiItemGetListBatchNumberGetRequest): Promise<Array<ItemDto>>;
+
     /**
      * 
      * @param {*} [options] Override http request option.
@@ -43,6 +60,34 @@ export interface ItemApiInterface {
  * 
  */
 export class ItemApi extends runtime.BaseAPI implements ItemApiInterface {
+
+    /**
+     */
+    async apiItemGetListBatchNumberGetRaw(requestParameters: ApiItemGetListBatchNumberGetRequest): Promise<runtime.ApiResponse<Array<ItemDto>>> {
+        if (requestParameters.batchNumber === null || requestParameters.batchNumber === undefined) {
+            throw new runtime.RequiredError('batchNumber','Required parameter requestParameters.batchNumber was null or undefined when calling apiItemGetListBatchNumberGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Item/GetList/{batchNumber}`.replace(`{${"batchNumber"}}`, encodeURIComponent(String(requestParameters.batchNumber))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     */
+    async apiItemGetListBatchNumberGet(requestParameters: ApiItemGetListBatchNumberGetRequest): Promise<Array<ItemDto>> {
+        const response = await this.apiItemGetListBatchNumberGetRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */
