@@ -64,7 +64,7 @@ const CardOverview = observer(function CardOverview() {
               event.stopPropagation();
               navigate(`/cards/create`);
             }}
-            title="AddCard"
+            id="AddCard"
           > 
             <AddIcon/>
           </IconButton>
@@ -78,7 +78,7 @@ const CardOverview = observer(function CardOverview() {
                 // await new Promise((resolve) => setTimeout(resolve, 1000));
                 await cardStore.fetch();
               }}
-              title="DeleteCard"
+              id="DeleteCard"
             >
               <DeleteIcon />
             </IconButton>

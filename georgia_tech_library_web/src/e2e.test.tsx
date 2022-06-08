@@ -40,7 +40,7 @@ test("First test with puppeteer, page rendering", async () => {
   test("E2E creating new card", async () => {
     await page.click('a[href*="cards"]');
     await delay(450);
-    await page.click('[title="AddCard"]');
+    await page.click('[id="AddCard"]');
     await page.type('[id="cardNumber"]', "999999999999");
     await page.keyboard.press("Tab");
     await page.type('[id="dateOfIssue"]', "12/30/2022");
@@ -49,7 +49,7 @@ test("First test with puppeteer, page rendering", async () => {
       await page.keyboard.press('Backspace');
     await page.type('[id="expirationDay"]', "12/30/2026");
     await page.click('[id="cardNumber"]')
-     await page.click('[title="Submit"]') 
+     await page.click('[id="Submit"]') 
      await delay(800);
   });
 
@@ -59,13 +59,15 @@ test("E2E delete new card", async () => {
     const [button] = await page.$x("//button[contains(., 'Filters')]");
     await button.click();
     await page.keyboard.type("999999999999");
-    await delay(300);
-    await page.mouse.click(650, 430, { clickCount: 1 });
-    await delay(2000);
+    await delay(1500);
+    await page.mouse.click(200, 430, { clickCount: 1 });
+    await delay(500);
     await page.mouse.click(650, 220, { clickCount: 1 });
-    await delay(100);
-    await page.click('[title="DeleteCard"]')
-    await delay(200);
+    await delay(800);
+    //await page.mouse.click(850, 140, { clickCount: 1 });
+    await page.click('[id="DeleteCard"]')
+    
+    await delay(1000);
   });
 
 

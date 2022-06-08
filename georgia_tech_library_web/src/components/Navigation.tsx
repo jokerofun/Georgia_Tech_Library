@@ -12,6 +12,7 @@ const Navigation = () => {
             alt=""
             width="150"
             height="120"
+            title="logo"
           />
         </Navbar.Brand>
 
