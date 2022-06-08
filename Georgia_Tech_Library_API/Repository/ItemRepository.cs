@@ -25,9 +25,9 @@ namespace Georgia_Tech_Library_API.Repository
         public async Task<IEnumerable<Item>> GetBatch(int batchNumber)
         {
             int from = 0;
-            if (batchNumber > 1)
-                from = 100 * (batchNumber - 1) + 1;
-            int until = 100 * batchNumber;
+            if (batchNumber > 0)
+                from = 100 * batchNumber + 1;
+            int until = 100 * (batchNumber + 1);
             var sql = "exec [getItemBatch] @from, @until";
             var values = new {from = from, until = until};
 

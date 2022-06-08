@@ -23,10 +23,10 @@ namespace Georgia_Tech_Library_API.Repository
         }
         public async Task<IEnumerable<BorrowingActivity>> GetBatch(int batchNumber)
         {
-            int from = 0; 
-            if (batchNumber > 1)
-                from = 1000 * (batchNumber - 1) + 1;
-            int until = 1000 * batchNumber;
+            int from = 0;
+            if (batchNumber > 0)
+                from = 1000 * batchNumber + 1;
+            int until = 1000 * (batchNumber + 1);
             var sql = "exec [getBorrowingActivityBatch] @from, @until";
             var values = new { from = from, until = until };
 
