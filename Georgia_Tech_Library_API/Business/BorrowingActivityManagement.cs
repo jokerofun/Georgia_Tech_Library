@@ -17,6 +17,10 @@ namespace Georgia_Tech_Library_API.Business
         {
             return await borrowingActivityRepository.GetAll();
         }
+        public async Task<IEnumerable<BorrowingActivity>> GetBatch(int batchNumber)
+        {
+            return await borrowingActivityRepository.GetBatch(batchNumber);
+        }
 
         public Task<int> Insert(BorrowingActivity obj)
         {

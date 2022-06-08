@@ -27,6 +27,15 @@ namespace Georgia_Tech_Library_API.Controllers
             return Ok(await borrowingActivityManagement.GetAll());
         }
 
+        [HttpGet]
+        [Route("/api/[controller]/GetList/{batchNumber}")]
+        [ProducesResponseType(typeof(BorrowingActivity[]), StatusCodes.Status200OK)]
+        [Produces("application/json", "text/plain", "text/json")]
+        public async Task<ActionResult<IEnumerable<BorrowingActivity>>> GetBatch(int batchNumber)
+        {
+            return Ok(await borrowingActivityManagement.GetBatch(batchNumber));
+        }
+
         [HttpPost]
         [Route("/api/[controller]/LoanItem")]
         [ProducesResponseType(StatusCodes.Status200OK)]

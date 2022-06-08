@@ -21,6 +21,21 @@ namespace Georgia_Tech_Library_API.Repository
             var result = await connection.QueryAsync<BorrowingActivity>(sql);
             return result.ToList();
         }
+        public async Task<IEnumerable<BorrowingActivity>> GetBatch(int batchNumber)
+        {
+            int from = 0; 
+            if (batchNumber > 1)
+                from = 1000 * (batchNumber - 1) + 1;
+            int until = 1000 * batchNumber;
+            var sql = "exec [getBorrowingActivityBatch] @from, @until";
+            var values = new { from = from, until = until };
+
+            using var connection = _dbConnectionFactory.CreateSqlConnection();
+            connection.Open();
+
+            var result = await connection.QueryAsync<BorrowingActivity>(sql, values);
+            return result.ToList();
+        }
 
         public Task<BorrowingActivity> GetBorrowingActivitiesByISBN(string ISBN)
         {

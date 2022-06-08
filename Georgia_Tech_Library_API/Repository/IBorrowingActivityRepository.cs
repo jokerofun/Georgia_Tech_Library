@@ -4,6 +4,7 @@ namespace Georgia_Tech_Library_API.Repository
 {
     public interface IBorrowingActivityRepository : IGenericRepository<BorrowingActivity>
     {
+        Task<IEnumerable<BorrowingActivity>> GetBatch(int batchNumber);
         Task<BorrowingActivity> GetBorrowingActivitiesByMember(string SSN);
         Task<BorrowingActivity> GetBorrowingActivitiesByISBN(string ISBN);
         Task<int> LoanItem(BorrowingActivity obj);

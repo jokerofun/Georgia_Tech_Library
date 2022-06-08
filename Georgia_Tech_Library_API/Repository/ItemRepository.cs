@@ -28,11 +28,13 @@ namespace Georgia_Tech_Library_API.Repository
             if (batchNumber > 1)
                 from = 100 * (batchNumber - 1) + 1;
             int until = 100 * batchNumber;
-            var sql = "SELECT ISBN, Title, Publisher, Edition, DateOfPublishing, t.Name, t.Lendable FROM(SELECT ROW_NUMBER() OVER(ORDER BY ISBN) as RowNum,*FROM Item) sub INNER JOIN Type t ON sub.Type = t.Name WHERE RowNum BETWEEN " + from + " AND " + until;
+            var sql = "exec [getItemBatch] @from, @until";
+            var values = new {from = from, until = until};
 
             using var connection = _dbConnectionFactory.CreateSqlConnection();
             connection.Open();
-            var result = await connection.QueryAsync<Item, ItemType, Item>(sql, (item, type) => { item.ItemType = type; return item; }, splitOn: "Name");
+
+            var result = await connection.QueryAsync<Item, ItemType, Item>(sql,(item, type) => { item.ItemType = type; return item; }, values, splitOn: "Name");
             return result.ToList();
         }
 
