@@ -115,7 +115,7 @@ const CardFormFields = ({ props }: { props: FormikProps<FormCard> }) => {
       </Grid>
       <Grid container item xs={12} spacing={3}>
         <Grid item textAlign="end" xs={6}>
-          <Button color="primary" variant="contained" type="submit">
+          <Button color="primary" variant="contained" type="submit" title="Submit">
             Submit
           </Button>
         </Grid>
