@@ -16,6 +16,10 @@ namespace Georgia_Tech_Library_API.Business
         {
             return await catalogRepository.GetAll();
         }
+        public async Task<IEnumerable<Catalog>> GetBatch(int batchNumber)
+        {
+            return await catalogRepository.GetBatch(batchNumber);
+        }
 
         public Task<int> Insert(Catalog obj)
         {
