@@ -5,6 +5,7 @@ import CatalogOverview from "./CatalogOverview";
 import ItemOverview from "./ItemOverview";
 import CardOverview from "./CardOverview";
 import CardForm from "./CardForm";
+import BorrowingActivityOverview from "./BorrowingActivityOverview";
 
 const MainContent = () => {
   return (
@@ -12,6 +13,10 @@ const MainContent = () => {
       <Routes>
         <Route path="/items" element={<ItemOverview />} />
         <Route path="/catalog" element={<CatalogOverview />} />
+        <Route
+          path="/borrowingactivity"
+          element={<BorrowingActivityOverview />}
+        />
         <Route path="/cards" element={<CardOverview />} />
         <Route path="/cards/create" element={<CardForm />} />
       </Routes>

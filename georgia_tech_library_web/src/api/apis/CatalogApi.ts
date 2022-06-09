@@ -18,6 +18,10 @@ import {
     Catalog,
 } from '../models';
 
+export interface ApiCatalogGetListBatchNumberGetRequest {
+    batchNumber: number;
+}
+
 /**
  * CatalogApi - interface
  * 
@@ -25,6 +29,19 @@ import {
  * @interface CatalogApiInterface
  */
 export interface CatalogApiInterface {
+    /**
+     * 
+     * @param {number} batchNumber 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CatalogApiInterface
+     */
+    apiCatalogGetListBatchNumberGetRaw(requestParameters: ApiCatalogGetListBatchNumberGetRequest): Promise<runtime.ApiResponse<Array<Catalog>>>;
+
+    /**
+     */
+    apiCatalogGetListBatchNumberGet(requestParameters: ApiCatalogGetListBatchNumberGetRequest): Promise<Array<Catalog>>;
+
     /**
      * 
      * @param {*} [options] Override http request option.
@@ -43,6 +60,34 @@ export interface CatalogApiInterface {
  * 
  */
 export class CatalogApi extends runtime.BaseAPI implements CatalogApiInterface {
+
+    /**
+     */
+    async apiCatalogGetListBatchNumberGetRaw(requestParameters: ApiCatalogGetListBatchNumberGetRequest): Promise<runtime.ApiResponse<Array<Catalog>>> {
+        if (requestParameters.batchNumber === null || requestParameters.batchNumber === undefined) {
+            throw new runtime.RequiredError('batchNumber','Required parameter requestParameters.batchNumber was null or undefined when calling apiCatalogGetListBatchNumberGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Catalog/GetList/{batchNumber}`.replace(`{${"batchNumber"}}`, encodeURIComponent(String(requestParameters.batchNumber))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     */
+    async apiCatalogGetListBatchNumberGet(requestParameters: ApiCatalogGetListBatchNumberGetRequest): Promise<Array<Catalog>> {
+        const response = await this.apiCatalogGetListBatchNumberGetRaw(requestParameters);
+        return await response.value();
+    }
 
     /**
      */

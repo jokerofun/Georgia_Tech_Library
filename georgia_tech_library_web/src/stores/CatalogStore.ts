@@ -15,9 +15,16 @@ export class CatalogStore extends IStore {
     });
   }
 
-  public async fetch() {
+  public async fetchAll() {
     const catalog = await this._api.apiCatalogGetListGet();
     this.setCatalog(catalog);
+  }
+
+  public async fetchBatch(batchNumber: number) {
+    const catalogBatch = await this._api.apiCatalogGetListBatchNumberGet({
+      batchNumber,
+    });
+    this.setCatalog(catalogBatch);
   }
 
   public get catalog(): Catalog[] {
@@ -25,9 +32,7 @@ export class CatalogStore extends IStore {
   }
 
   private setCatalog(catalog: Catalog[]): void {
-    this._catalog.replace(
-      observable.map(catalog.map((c) => [c.libraryName, c])),
-    );
+    this._catalog.replace(observable.map(catalog.map((c) => [c.isbn, c])));
   }
 
   //   public setSingleHealthFacility(healthFacility: HealthFacility): void {

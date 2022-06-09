@@ -19,6 +19,7 @@ export class BorrowingActivityStore extends IStore {
     const bas = await this._api.apiBorrowingActivityGetListGet();
     this.setBas(bas);
   }
+
   public async fetchBatch(batchNumber: number) {
     const bas = await this._api.apiBorrowingActivityGetListBatchNumberGet({
       batchNumber,

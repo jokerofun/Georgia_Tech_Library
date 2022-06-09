@@ -116,6 +116,7 @@ const ItemOverview = observer(function ItemOverview() {
           pagination
           paginationMode="server"
           pageSize={100}
+          rowsPerPageOptions={[]}
           rowThreshold={0}
           checkboxSelection
           page={pageNumber}
